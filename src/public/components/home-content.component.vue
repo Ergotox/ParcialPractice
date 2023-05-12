@@ -8,6 +8,8 @@
                     <template #title class="custom-title">{{ post.title }}</template>
                     <template #content>
                         <img :src="post.photoUrl" :alt="post.title" aria-label="post image" style="width:250px; border-radius:30px; height: 200px; "/>
+                        <br>
+                        <pv-button class="view-button" @click="viewPost(post)">See More</pv-button>
                     </template>
                 </pv-card>
             </div>
@@ -21,6 +23,8 @@
                     <template #title class="custom-title">{{ post.title }}</template>
                     <template #content>
                         <img :src="post.photoUrl" :alt="post.title" aria-label="post image" style="width:250px; border-radius:30px; height: 200px; "/>
+                        <br>
+                        <pv-button class="view-button" @click="viewPost(post)">See More</pv-button>
                     </template>
                 </pv-card>
             </div>
@@ -71,6 +75,13 @@ export default{
             this.noTop = this.posts.filter((post) => !this.topThree.includes(post));
             console.log("Posts que no están en el top 3:", this.noTop);
         },
+        viewPost(post) {
+            this.$router.push({
+                name: 'post',
+                params: { id: post.id },
+                query: { post: JSON.stringify(post) },
+            });
+        },
     },
 }
 </script>
@@ -94,7 +105,7 @@ export default{
 .postcards{
     margin:30px;
     width:400px;
-    height: 350px;
+    height: 400px;
 }
 .custom-title {
     font-size: 20px;
